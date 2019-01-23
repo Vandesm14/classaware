@@ -8,8 +8,8 @@
     "url": ""
   },
   "scripts": {},
-  "start": "node app.js"
-  "author": "",
+  "start": "node app.js",
+  "author": "Vandesm14",
   "license": "MIT",
   "dependencies": {
     "express": "latest",
