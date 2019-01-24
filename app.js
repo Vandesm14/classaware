@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -22,4 +23,6 @@ app.get('/version', (req, res) => {
 	res.sendFile(__dirname + '/public/hold/version.txt');
 });
 
-app.listen(3000, () => console.log('server started'));
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
