@@ -11,7 +11,7 @@ app.use('/', express.static(__dirname + '/public/'));
 // app.use('/beta', express.static('public/beta'));
 
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/public/stable/index.html');
+	res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/beta', (req, res) => {
