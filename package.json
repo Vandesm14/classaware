@@ -3,18 +3,17 @@
   "version": "1.0.0",
   "description": "Beta server for Classaware",
   "main": "app.js",
-    "repository": {
+  "repository": {
     "type": "git",
     "url": ""
   },
   "scripts": {
-		"start": "node app.js"
-	},
+    "start": "node app.js"
+  },
   "author": "Vandesm14",
   "license": "MIT",
   "dependencies": {
-    "express": "latest",
-    "body-parser": "latest",
-    "sqlite3": "latest"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
   }
 }
