@@ -2,13 +2,13 @@
   "name": "classaware",
   "version": "1.0.0",
   "description": "Beta server for Classaware",
-  "main": "index.js",
+  "main": "app.js",
     "repository": {
     "type": "git",
     "url": ""
   },
-  "script": {
-		"start": "node index.js"
+  "scripts": {
+		"start": "node app.js"
 	},
   "author": "Vandesm14",
   "license": "MIT",
