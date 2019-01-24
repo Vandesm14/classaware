@@ -7,14 +7,14 @@
     "type": "git",
     "url": ""
   },
-  "scripts": {},
-  "start": "node index.js",
+  "scripts": {
+		"start": "node index.js"
+	},
   "author": "Vandesm14",
   "license": "MIT",
   "dependencies": {
     "express": "latest",
     "body-parser": "latest",
-    "sqlite3": "latest",
-    "request": "2.88.0"
+    "sqlite3": "latest"
   }
 }
