@@ -1,6 +1,0 @@
-4.6.0 (Current Version)
-Added version numbering
-Added changelog
-
-4.5.0
-Added color schemes

@@ -3,6 +3,7 @@
 body {
 	background-color: #033860;
 	color: white;
+	background-image: radial-gradient(#11427c, #032741);
 }
 
 #Period {
