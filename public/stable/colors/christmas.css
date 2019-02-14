@@ -1,0 +1,49 @@
+/* Monthly Colors: http://www.birthdaycelebrations.net/birthstonesflowersandstars.htm */
+
+body {
+	background-color: rgb(247, 77, 77);
+	color: white;
+}
+        
+#Period {
+  color: rgb(136, 73, 143);
+}
+        
+#Time {
+  color: rgb(76, 255, 106);
+}
+        
+#Next {
+  color: rgb(136, 73, 143);
+}
+        
+#Date {
+  color: rgb(76, 255, 106);
+}
+
+#Day {
+  color: rgb(145, 196, 242);
+}
+        
+#bar {
+  background-color: green;
+  color: white;
+}
+        
+#box {
+  border-color: black;
+}
+
+#bar2 {
+  background-color: #DAFF7D;
+  color: white;
+}
+        
+#box2 {
+  border-color: black;
+}
+
+.Menu {
+	background-color: rgb(34, 168, 0);
+	/* border-bottom: 1px solid rgb(100, 0, 0); */
+}
