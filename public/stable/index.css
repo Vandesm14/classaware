@@ -1,0 +1,210 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:300,700,400);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700);
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+/* Monthly Colors: http://www.birthdaycelebrations.net/birthstonesflowersandstars.htm */
+
+/* --- GLOBAL INSERT --- */
+.important {
+  color:orange;
+	/* background-color: black; */
+}
+
+.warning {
+  color:red;
+	/* background-color: black; */
+}
+
+.success {
+  color:green;
+	/* background-color: black; */
+}
+
+.info {
+	color:#0098ff;
+	/* background-color: black; */
+}
+
+.white {
+	color:white;
+	/* background-color: black; */
+}
+
+.black-bkg {
+	background-color: black;
+}
+
+#op:hover {
+	background-color: #aaa;
+}
+
+.red {
+	background-color: red;
+	color: white;
+}
+
+.lightgrey {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.yellow {
+	background-color: yellow;
+	color: black;
+}
+
+#op:hover {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+/* --- GLOBAL INSERT END --- */
+
+
+body {
+	margin: 0;
+	font-family: Muli;
+}
+
+div {
+  margin: auto;
+  text-align: center;
+  font-size: 20px;
+}
+      
+#alternate {
+  margin: auto;
+  font-size: 15;
+}
+        
+#Period {
+  font-size: 75px;
+}
+        
+#Timer {
+  font-size: 100px;
+}
+        
+#Time {
+  font-size: 50px;
+}
+        
+#Next {
+  font-size: 25px;
+}
+        
+#Date {
+  font-size: 50px;
+}
+
+#Day {
+  font-size: 50px;
+}
+        
+#bar {
+  float: left;
+  height: 20px;
+  width: 0px;
+  font-size: 16px;
+  font-family: arial;
+  font-weight: 900;
+}
+        
+#box {
+  float: left;
+  height: 20px;
+  width: calc(100% - 4px);
+  border-width: 2px;
+  border-style: solid;
+	/* margin-left: -4px; */
+}
+
+/* #bar2 {
+  float: left;
+  height: 20px;
+  width: 0px;
+  font-size: 16px;
+  font-family: arial;
+  font-weight: 900;
+}
+        
+#box2 {
+  float: left;
+  height: 20px;
+  width: 100%;
+  border-width: 2px;
+  border-style: solid;
+} */
+        
+footer {
+  text-align: center;
+	margin-bottom: 10px;
+}
+        
+.new {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Clock {
+  margin-bottom:10px;
+	/* margin-top: 45px; */
+}
+
+.Menu {
+	/* position: fixed; */
+	width:100%;
+	height:40px;
+	margin-bottom:5px;
+	box-shadow: black 0px 2px 10px;
+}
+
+.options {
+	float:right;
+	text-align:right;
+	position:absolute;
+}
+
+#op {
+	width:30px;
+	height:30px;
+	background-size: 100px;
+	padding:5px;
+}
+
+#settingsWindow {
+	float:left;
+	background-color: white;
+	padding: 6px;
+	margin-top: -4px;
+	box-shadow: black 3px 2px 10px;
+}
+
+.logo {
+	float:left;
+}
+
+#logoPng {
+	width:30px;
+	height:30px;
+	padding:5px;
+}
+
+/* #snow {
+	position: absolute;
+	height: 100vh;
+} */
+
+#snow {
+	/* display: none; */
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%; 
+	min-height: 100%;
+	z-index: -1;
+	opacity: 0.8;
+}
+
+#snowHide {
+	opacity: 0;
+	z-index: 99;
+}

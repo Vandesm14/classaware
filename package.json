@@ -1,19 +1,15 @@
 {
-  "name": "classaware",
-  "version": "1.0.0",
-  "description": "Beta server for Classaware",
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "scripts": {
-    "start": "node app.js"
-  },
-  "author": "Vandesm14",
+  "name": "app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "latest",
+    "body-parser": "latest",
+    "sqlite3": "latest",
+    "request": "2.88.0"
   }
 }
