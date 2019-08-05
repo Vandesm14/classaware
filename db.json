@@ -1,0 +1,17 @@
+[{
+		"name": "normal",
+		"days": "35",
+		"data": {
+			"times": ["7:50", "8:40", "9:30", "10:20", "11:10", "12:00"],
+			"names": ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6"]
+		}
+	},
+	{
+		"name": "half-day",
+		"days": "124",
+		"data": {
+			"times": ["7:50", "8:40", "9:30"],
+			"names": ["Period 1", "Period 2", "Period 3"]
+		}
+	}
+]
