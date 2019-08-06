@@ -13,32 +13,45 @@ function increaseTimer() {
 		return;
 	}
 
-	// ((Math.floor(time / periodLength) + 1) * periodLength) - time
-
-	let pointer = $('.timer-pointer').css('left');
 	let pointerWidth = $('.timer-pointer').width();
-
 	let timerWidth = $('.timer').outerWidth() - pointerWidth;
 
-	// $('.timer-pointer-label').text(time);
+	// Set time Left
 	$('.timer-pointer-label').text(((Math.floor(time / periodLength) + 1) * periodLength) - time);
-	let labelWidth = $('.timer-pointer-label').width();
 
-	// $('.timer-pointer').css('left', ($(window).width() / 100 * 15) + (timerWidth / maxTime) * time) - (pointerWidth / 2);
-	$('.timer').css('left', (($(window).width() / 100 * 15) - (timerWidth / maxTime) * time) + (timerWidth / 2));
+	// Move pointer
+	$('.timer-pointer').animate({
+		left: (($(window).width() / 100 * 43) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
+	}, 500);
 
-	// $('.timer-pointer-label').css('left', ($(window).width() / 100 * 15) + (timerWidth / maxTime) * time - (labelWidth / 2 - 3));
-
-	$('.timer').children('.timer-column').removeClass('current');
-	$('.timer').children('.timer-column').css('opacity', '0');
-
-	$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength)})`).addClass('current');
-	$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength)})`).css('opacity', '100');
-
-	$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength) + 1})`).css('opacity', '100');
-	if ((Math.floor(time / periodLength) - 1) !== - 1) {
-		$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength) - 1})`).css('opacity', '100');
+	if (time < periodLength * periods) {
+		$('.timer').animate({
+			left: (($(window).width() / 100 * 15) - (timerWidth / maxTime) * Math.floor(time / periodLength) * periodLength) + (timerWidth / 2.5)
+		}, 500);
 	}
+
+	// Update Timer
+	if (time % periodLength === 0 || time === 0 && time < periodLength * (periods - 1)) {
+		// Move Timer
+
+		// Reset column classes
+		$('.timer').children('.timer-column').removeClass('current');
+		$('.timer').children('.timer-column').css('opacity', '0.2');
+
+		// Set main column class
+		$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength)})`).addClass('current');
+		$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength)})`).css('opacity', '1');
+
+		// Show secondary columns
+		$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength) + 1})`).css('opacity', '1');
+		if ((Math.floor(time / periodLength) - 1) !== -1) {
+			$('.timer').children(`.timer-column:eq(${Math.floor(time / periodLength) - 1})`).css('opacity', '1');
+		}
+	}
+}
+
+function updateTimer() {
+
 }
 
 var schedules = [{
