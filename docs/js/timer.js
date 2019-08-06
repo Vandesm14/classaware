@@ -1,38 +1,48 @@
 var periods = 6;
+// var time = -1;
 var time = -1;
-var maxTime = 360;
+var maxTime = 60;
 var periodLength = maxTime / periods;
 
 // increaseTimer();
 var timerInterval = setInterval(increaseTimer, 1000);
 
 function increaseTimer() {
+	let pointerWidth = $('.timer-pointer').width();
+	let timerWidth = $('.timer').outerWidth() - pointerWidth;
+	let vw = $(window).width() / 100;
+	
+	let cellSpacing = 44.7;
+	let cellWidth = 10.6;
+
 	time++;
 	if (time > maxTime) {
 		clearInterval(timerInterval);
 		return;
 	}
 
-	let pointerWidth = $('.timer-pointer').width();
-	let timerWidth = $('.timer').outerWidth() - pointerWidth;
+	if ($(window).width() <= 640) {
+		cellSpacing = 34;
+		cellWidth = 32;
+	}
 
-	// Set time Left
+	// Set time left
 	$('.timer-pointer-label').text(((Math.floor(time / periodLength) + 1) * periodLength) - time);
 
 	// Move pointer
 	$('.timer-pointer').animate({
-		left: (($(window).width() / 100 * 43) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
+		left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
 	}, 500);
 
+	// Move timer
 	if (time < periodLength * periods) {
 		$('.timer').animate({
-			left: (($(window).width() / 100 * 15) - (timerWidth / maxTime) * Math.floor(time / periodLength) * periodLength) + (timerWidth / 2.5)
+			left: (vw * cellSpacing) - ((vw * cellWidth) * (Math.floor(time / periodLength) - 0))
 		}, 500);
 	}
 
-	// Update Timer
+	// Update columns
 	if (time % periodLength === 0 || time === 0 && time < periodLength * (periods - 1)) {
-		// Move Timer
 
 		// Reset column classes
 		$('.timer').children('.timer-column').removeClass('current');
