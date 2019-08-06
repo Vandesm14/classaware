@@ -1,9 +1,0 @@
---------AJAX--------
-Schedules (or "schedule")
-Letter Day
-
---------Output--------
-(Once + Load) Date
-(Once + AJAX) Letter Day
-(Interval + Sec) Time
-(Interval + Sec) Timer
