@@ -39,7 +39,7 @@ body {
 }
 
 .info * {
-	margin: 6px;
+	margin: 0.4vw;
 	padding: 0;
 }
 
@@ -47,12 +47,35 @@ body {
 	font-size: 1.5vw;
 }
 
+.info-time {
+	font-size: 2vw;
+}
+
 .info-day {
 	font-size: 1.3vw;
 }
 
-.info-time {
-	font-size: 2vw;
+@media only screen and (max-device-width : 640px) {
+	.title {
+		font-size: 15vw;
+	}
+
+	.info * {
+		margin: 2vw;
+		padding: 0;
+	}
+
+	.info-date {
+		font-size: 6vw;
+	}
+
+	.info-time {
+		font-size: 7vw;
+	}
+
+	.info-day {
+		font-size: 5vw;
+	}
 }
 
 .timer-container {
@@ -72,6 +95,8 @@ body {
 	margin: auto auto;
 	height: 15%;
 	border-radius: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
 .timer-column {
@@ -100,10 +125,6 @@ body {
 }
 
 @media only screen and (max-device-width : 640px) {
-	.title {
-		font-size: 15vw;
-	}
-
 	.timer-column {
 		width: 30vw;
 		height: 20vw;
@@ -127,7 +148,7 @@ body {
 
 .timer-pointer {
 	position: absolute;
-	top: 12vw;
+	/* top: 11.4vw; */
 	left: calc(50% - 2px);
 	display: block;
 	width: calc(1vw / 4);
@@ -136,22 +157,27 @@ body {
 	background-color: #ff5252;
 }
 
-@media only screen and (max-device-width : 640px) {
-	.timer-pointer {
-		top: 40vw;
-		width: calc(1vw / 1.5);
-		height: 24vw;
-	}
-}
-
 .timer-pointer-label {
 	position: absolute;
 	top: 64%;
-	left: calc(50% - 15%);
+	left: calc(50% - 30%);
 	display: block;
-	width: 30%;
+	width: 60%;
 	text-align: center;
 	font-weight: 600;
-	font-size: 46px;
+	font-size: 4vw;
 	font-family: 'Fira Code', monospace;
+}
+
+@media only screen and (max-device-width : 640px) {
+	.timer-pointer {
+		/* top: 40vw; */
+		width: calc(1vw / 1.5);
+		height: 23vw;
+	}
+
+	.timer-pointer-label {
+		top: 70%;
+		font-size: 10vw;
+	}
 }

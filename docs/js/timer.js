@@ -1,17 +1,19 @@
 /* jshint esversion: 6 */
 var schedules = [{
 		name: 'normal',
-		days: '35',
+		days: '12345',
 		data: {
-			times: ['7:50', '8:40', '9:30', '10:20', '11:10', '12:00'],
-			names: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5', 'Period 6'],
-			short: ['1', '2', '3', '4', '5', '6']
+			startTime: '7:21',
+			times: ['8:15', '9:06', '9:57', '10:48', '11:39', '12:30', '13:21', '14:12'],
+			names: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8'],
+			short: ['1', '2', '3', '4', '5', '6', '7', '8']
 		}
 	},
 	{
 		name: 'half-day',
 		days: '124',
 		data: {
+			startTime: '7:00',
 			times: ['7:50', '8:40', '9:30'],
 			names: ['Period 1', 'Period 2', 'Period 3'],
 			short: ['1', '2', '3']
@@ -19,18 +21,15 @@ var schedules = [{
 	}
 ];
 
-var time = -1;
-var maxTime = 360;
-var periodLength = maxTime / periods;
 var remainingTime;
-
 var scheduleIndex;
 var currentSchedule;
 var periods;
 var currentPeriod;
+var periodLength;
 
 var timerInterval;
-var timeOffset = 28800;
+var timeOffset = 0;
 
 getCurrentSchedule();
 
@@ -42,12 +41,8 @@ function increaseTimer() {
 	let cellSpacing = 45;
 	let cellWidth = 10;
 
-	time++;
+	// ======= ADD Condition if not over max period time =======
 	getCurrentPeriod();
-	if (time > maxTime) {
-		clearInterval(timerInterval);
-		return;
-	}
 
 	if ($(window).width() <= 640) {
 		cellSpacing = 32;
@@ -62,16 +57,17 @@ function increaseTimer() {
 	// Move pointer
 	$('.timer-pointer').animate({
 		// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
+		left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
+
 	});
 
 	// Move timer
 	$('.timer').animate({
-		// left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
 		left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
 	});
 
 	// Update columns
-	// ======= ADD Condition if not over max period time =======
+
 	// Reset column classes
 	$('.timer').children('.timer-column').removeClass('current');
 	$('.timer').children('.timer-column').removeClass('next');
@@ -102,7 +98,6 @@ function getCurrentSchedule() {
 	// set current schedule variable
 	periods = schedules[scheduleIndex].data.times.length;
 	currentSchedule = schedules[scheduleIndex];
-	periodLength = 50*60;
 	// set timer columns to names
 	createColumns();
 }
@@ -119,9 +114,6 @@ function createColumns() {
 }
 
 function getCurrentPeriod() {
-	// let remainingTime;
-	// get current time
-
 	// DEV offset
 	let time = new Date();
 	time.setTime(time.getTime() + (timeOffset * 1000));
@@ -129,6 +121,7 @@ function getCurrentPeriod() {
 	// find position in times array
 	for (let i in currentSchedule.data.times) {
 		let periodTime = new Date();
+		let previousPeriodTime = new Date();
 		periodTime.setHours(currentSchedule.data.times[i].split(':')[0]);
 		periodTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
 		periodTime.setSeconds(0);
@@ -136,17 +129,39 @@ function getCurrentPeriod() {
 		if (time < periodTime) {
 			// perform subtraction function
 			remainingTime = periodTime - time;
-			currentPeriod = i;
-			break;
+			currentPeriod = parseInt(i);
 
-			// console.table([periodTime.toLocaleString(), time.toLocaleString(), new Date(remainingTime).toLocaleString().split(', ')[1], currentPeriod	]);
+			// get period duration
+			if (i === 0) {
+				previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
+				previousPeriodTime.setMinutes(currentSchedule.data.startTime.split(':')[1]);
+			} else {
+				previousPeriodTime.setHours(currentSchedule.data.times[i - 1].split(':')[0]);
+				previousPeriodTime.setMinutes(currentSchedule.data.times[i - 1].split(':')[1]);
+			}
+			previousPeriodTime.setSeconds(0);
+
+			periodLength = periodTime - previousPeriodTime;
+			break;
 		}
 	}
+
 	// output time left
-	$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
+	if (remainingTime === undefined) {
+		$('.timer-pointer-label').text('End');
+	} else {
+		$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
+	}
 }
 
 function parseTime(date) {
 	let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-	return date.getMinutes() + ':' + seconds;
+	let hours = date / 3600000 < 1 ? '' : Math.floor(date / 3600000) + ':';
+	let minutes;
+	if (date.getMinutes() !== 0) {
+		minutes = date.getMinutes() < 10 && hours !== '' ? '0' + date.getMinutes() : date.getMinutes() + ':';
+	} else {
+		minutes = '';
+	}
+	return hours + minutes + seconds;
 }
