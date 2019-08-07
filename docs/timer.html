@@ -17,30 +17,16 @@
 			<p class="info-day">Day</p>
 		</div>
 		<div class="timer-container">
-			<div class="timer">
-				<div class="timer-column">
-					<p class="timer-column-text">1</p>
-				</div>
-				<div class="timer-column">
-					<p class="timer-column-text">2</p>
-				</div>
-				<div class="timer-column">
-					<p class="timer-column-text">3</p>
-				</div>
-				<div class="timer-column">
-					<p class="timer-column-text">4</p>
-				</div>
-				<div class="timer-column">
-					<p class="timer-column-text">5</p>
-				</div>
-				<div class="timer-column">
-					<p class="timer-column-text">6</p>
-				</div>
-			</div>
+			<div class="timer"></div>
 			<div class="timer-pointer"></div>
 			<div class="timer-pointer-label"></div>
 		</div>
 	</div>
+	<template id="column-template">
+		<div class="timer-column">
+			<p class="timer-column-text">{{name}}</p>
+		</div>
+	</template>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="js/timer.js"></script>
 </body>

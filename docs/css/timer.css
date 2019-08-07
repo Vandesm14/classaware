@@ -13,7 +13,8 @@ body {
 
 .title {
 	display: block;
-	margin: 0 auto;
+	/* DEV: No Title */
+	display: none;
 	margin-top: 4%;
 	width: 100%;
 	text-align: center;
@@ -27,6 +28,31 @@ body {
 	justify-content: center;
 	width: 100%;
 	height: 70vh;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	text-align: center;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.info * {
+	margin: 6px;
+	padding: 0;
+}
+
+.info-date {
+	font-size: 1.5vw;
+}
+
+.info-day {
+	font-size: 1.3vw;
+}
+
+.info-time {
+	font-size: 2vw;
 }
 
 .timer-container {
@@ -54,7 +80,7 @@ body {
 	justify-content: center;
 	width: 10vw;
 	height: 5vw;
-	border: 0.3vw solid #fff5;
+	/* border: 0.3vw solid #fff5; */
 	border-radius: 8px;
 	color: #757575;
 	font-size: 2vw;
@@ -62,10 +88,15 @@ body {
 }
 
 .timer-column.current {
-	border: 0.3vw solid #fff0;
+	/* border: 0.3vw solid #fff0; */
 	background-color: #4392f1;
 	color: white;
 	font-size: 3.5vw;
+}
+
+.timer-column.next {
+	opacity: 1;
+	color: white;
 }
 
 @media only screen and (max-device-width : 640px) {
@@ -76,12 +107,12 @@ body {
 	.timer-column {
 		width: 30vw;
 		height: 20vw;
-		border: 1vw solid #fff5;
+		/* border: 1vw solid #fff5; */
 		font-size: 6vw;
 	}
 
 	.timer-column.current {
-		border: 1vw solid #fff0;
+		/* border: 1vw solid #fff0; */
 		font-size: 12vw;
 	}
 }
@@ -96,24 +127,26 @@ body {
 
 .timer-pointer {
 	position: absolute;
+	top: 12vw;
 	left: calc(50% - 2px);
 	display: block;
 	width: calc(1vw / 4);
-	height: 5vw;
+	height: 6.2vw;
 	border-radius: 4px;
 	background-color: #ff5252;
 }
 
 @media only screen and (max-device-width : 640px) {
 	.timer-pointer {
-		width: calc(1vw / 2);
-		height: 20vw;
+		top: 40vw;
+		width: calc(1vw / 1.5);
+		height: 24vw;
 	}
 }
 
 .timer-pointer-label {
 	position: absolute;
-	top: 62%;
+	top: 64%;
 	left: calc(50% - 15%);
 	display: block;
 	width: 30%;

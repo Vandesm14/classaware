@@ -3,7 +3,8 @@
 		"days": "135",
 		"data": {
 			"times": ["7:50", "8:40", "9:30", "10:20", "11:10", "12:00"],
-			"names": ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6"]
+			"names": ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6"],
+			"short": ["1", "2", "3", "4", "5", "6"]
 		}
 	},
 	{
@@ -11,7 +12,8 @@
 		"days": "24",
 		"data": {
 			"times": ["7:50", "8:40", "9:30"],
-			"names": ["Period 1", "Period 2", "Period 3"]
+			"names": ["Period 1", "Period 2", "Period 3"],
+			"short": ["1", "2", "3"]
 		}
 	}
 ]
