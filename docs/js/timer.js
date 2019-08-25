@@ -54,6 +54,7 @@ function createColumns() {
 	let template = $('#column-template').html();
 	for (let i in schedules[scheduleIndex].data.short) {
 		let hold = template.replace('{{name}}', schedules[scheduleIndex].data.short[i]);
+		hold = hold.replace('{{endTime}}', schedules[scheduleIndex].data.times[i]);
 		$('.timer').append(hold);
 	}
 
@@ -78,7 +79,8 @@ function increaseTimer() {
 	}
 
 	// Update info
-	$('.info-date').text(new Date().toLocaleString().split(', ')[0]);
+	// $('.info-date').text(new Date().toLocaleString().split(', ')[0]);
+	$('.info-date').text(new String(new Date()).split(' ').splice(0,3).join(' '));
 	$('.info-time').text(new Date().toLocaleString().split(', ')[1].replace(/:\d\d([ ap]|$)/, ' '));
 	$('.info-day').text('F Day');
 
@@ -86,7 +88,6 @@ function increaseTimer() {
 	$('.timer-pointer').animate({
 		// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
 		left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
-
 	});
 
 	// Move timer
@@ -149,8 +150,10 @@ function getCurrentPeriod() {
 	// output time left
 	if (remainingTime === undefined) {
 		$('.timer-pointer-label').text('End');
+		$('.timer-period-label').text('');
 	} else {
 		$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
+		$('.timer-period-label').text(schedules[scheduleIndex].data.names[currentPeriod]);
 	}
 }
 
