@@ -8,7 +8,8 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100vh;
-	background-color: #303f9f;
+	/* background-color: #303f9f; */
+	background-color: #1E2B60;
 	background-image: url('https://i.pinimg.com/originals/5c/f2/66/5cf2660af5f4214def7166dc7a7c8062.jpg');
 	color: white;
 }
@@ -53,17 +54,26 @@ body {
 	font-family: 'Ubuntu', sans-serif;
 }
 
-.info * {
-	margin: 0.4vw;
+.info-time-container {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.info > p, .info-time-container > p {
+	margin: 0.4vw 0;
 	padding: 0;
 }
 
-.info-date {
+.info-date, .info-time {
 	font-size: 1.5vw;
 }
 
-.info-time {
-	font-size: 2vw;
+.info-time::before {
+	padding-left: 0.6vw;
+	content: ' | ';
+	color: #fff5;
 }
 
 .info-day {
@@ -75,17 +85,17 @@ body {
 		font-size: 15vw;
 	}
 
-	.info * {
+	.info > p {
 		margin: 2vw;
 		padding: 0;
 	}
 
-	.info-date {
+	.info-date, .info-time {
 		font-size: 6vw;
 	}
 
-	.info-time {
-		font-size: 7vw;
+	.info-time::before {
+		padding-left: 2vw;
 	}
 
 	.info-day {
@@ -100,7 +110,8 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	/* height: 100%; */
+
+/* height: 100%; */
 	height: 70%;
 }
 
@@ -183,9 +194,9 @@ body {
 	display: block;
 	width: 60%;
 	text-align: center;
-	/* font-weight: 200; */
 
-/* font-size: 4vw; */
+/* font-weight: 200; */
+	/* font-size: 4vw; */
 	font-size: 2.5vw;
 	font-family: 'Fira Code', monospace;
 }

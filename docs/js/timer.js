@@ -70,6 +70,9 @@ function increaseTimer() {
 	let cellSpacing = 45;
 	let cellWidth = 10;
 
+	let date = new String(new Date()).split(' ').splice(0,3).join(' ');
+	let time = new Date().toLocaleString().split(', ')[1].replace(/:\d\d([ ap]|$)/, ' ')
+
 	// ======= ADD Condition if not over max period time =======
 	getCurrentPeriod();
 
