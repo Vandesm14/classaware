@@ -1,4 +1,17 @@
 /* jshint esversion: 6 */
+
+$(document).ready(function(){
+	$('#toggleEditor').on('click', function(){
+		toggleEditor();
+	});
+	$('#submitEditor').on('click', function(){
+		submitClasses();
+	});
+	$('#deleteClasses').on('click', function(){
+		deleteClasses();
+	});
+});
+
 var schedules = [{
 		name: 'normal',
 		days: '15',
@@ -38,12 +51,16 @@ var periods;
 var currentPeriod;
 var periodLength;
 
+var customClasses;
 var timerInterval;
 var devOffest = 0;
 
 getCurrentSchedule();
 
 function getCurrentSchedule() {
+	if (localStorage.getItem('customClasses') !== undefined) {
+		customClasses = JSON.parse(localStorage.getItem('customClasses'));
+	}
 	// get current day
 	let day = new Date().getDay();
 	// filter schedules by day
@@ -58,6 +75,7 @@ function getCurrentSchedule() {
 	currentSchedule = schedules[scheduleIndex];
 	// set timer columns to names
 	createColumns();
+	createClassRows();
 }
 
 function createColumns() {
@@ -70,6 +88,28 @@ function createColumns() {
 
 	timerInterval = setInterval(increaseTimer, 1000);
 	increaseTimer();
+}
+
+function createClassRows() {
+	let allClasses = [];
+	for (let i in schedules) {
+		for (let k in schedules[i].data.names) {
+			if (!allClasses.includes(schedules[i].data.names[k])) {
+				allClasses.push(schedules[i].data.names[k]);
+			}
+		}
+	}
+
+	let template = $('#class-template').html();
+	for (let i in allClasses) {
+		let hold = template.replace('{{class}}', allClasses[i]);
+		if (customClasses !== null) {
+			hold = hold.replace('{{customClass}}', customClasses[allClasses[i]]);
+		} else {
+			hold = hold.replace('{{customClass}}', '');
+		}
+		$('.form-row-container').append(hold);
+	}
 }
 
 function increaseTimer() {
@@ -131,6 +171,7 @@ function getCurrentPeriod() {
 	// DEV offset
 	let time = new Date();
 	time.setTime(time.getTime() + (devOffest * 1000));
+	let period;
 
 	// find position in times array
 	for (let i in currentSchedule.data.times) {
@@ -165,9 +206,38 @@ function getCurrentPeriod() {
 		$('.timer-pointer-label').text('End');
 		$('.timer-period-label').text('');
 	} else {
+		if (customClasses === undefined || customClasses === null || customClasses[schedules[scheduleIndex].data.names[currentPeriod]] === '') {
+			period = schedules[scheduleIndex].data.names[currentPeriod];
+		} else {
+			period = customClasses[schedules[scheduleIndex].data.names[currentPeriod]];
+		}
+
 		$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
-		$('.timer-period-label').text(schedules[scheduleIndex].data.names[currentPeriod]);
+		$('.timer-period-label').text(period);
 	}
+}
+
+function toggleEditor() {
+	$('.editor').toggle();
+}
+
+function submitClasses() {
+	customClasses = {};
+	let period;
+	$('.form-row-container').children('.form-row').each(function(elem){
+		period = $(this).children('.form-label').text();
+		customClasses[period] = $(this).children('.form-input').val();
+	});
+
+	localStorage.setItem('customClasses', JSON.stringify(customClasses));
+}
+
+function deleteClasses() {
+	customClasses = null;
+	localStorage.removeItem('customClasses');
+	$('.form-row-container').children('.form-row').each(function(elem){
+		$(this).children('.form-input').val('');
+	});
 }
 
 function parseTime(date) {

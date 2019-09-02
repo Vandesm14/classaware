@@ -14,8 +14,7 @@
 	<meta charset="utf-8">
 	<title>Classaware</title>
 	<meta name="description" content="Classaware - Class Schedule Tracking and Awareness" />
-	<meta name="keywords"
-		content="Classaware, Timer, Bells, Class" />
+	<meta name="keywords" content="Classaware, Timer, Bells, Class" />
 	<link href="../css/timer.css" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="../images/fav.png">
 </head>
@@ -45,6 +44,14 @@
 			<option>Schedule C</option>
 			<option>Schedule D</option>
 		</select>
+		<button class="option-button" id="toggleEditor">Class Editor</button>
+		<div class="editor">
+			<div class="form">
+				<div class="form-row-container"></div>
+				<button class="option-button" id="submitEditor">Save</button>
+				<button class="option-button small" id="deleteClasses">Delete</button>
+			</div>
+		</div>
 	</div>
 	<footer>
 		<p class="copyright">© Copyright 2019 Shane M. Vandegrift</p>
@@ -52,6 +59,13 @@
 	<template id="column-template">
 		<div class="timer-column" title="Ends at {{endTime}}">
 			<p class="timer-column-text">{{name}}</p>
+		</div>
+	</template>
+	<template id="class-template">
+		<div class="form-row">
+			<label class="form-label">{{class}}</label>
+			<input type="text" class="form-input" placeholder="Class Name" value="{{customClass}}" />
+			<input type="color" />
 		</div>
 	</template>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
