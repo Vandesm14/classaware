@@ -1,15 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Code|Lato|PT+Sans|Ubuntu&display=swap');
-/* font-family: 'Fira Code', monospace; */
-/* font-family: 'Lato', sans-serif; */
-/* font-family: 'PT Sans', sans-serif; */
-/* font-family: 'Ubuntu', sans-serif; */
 
 body {
 	margin: 0;
 	padding: 0;
 	height: 100vh;
-	/* background-color: #303f9f; */
-	background-color: #1E2B60;
+
+/* background-color: #303f9f; */
+	background-color: #1e2b60;
 	background-image: url('https://i.pinimg.com/originals/5c/f2/66/5cf2660af5f4214def7166dc7a7c8062.jpg');
 	color: white;
 }
@@ -72,8 +69,8 @@ body {
 
 .info-time::before {
 	padding-left: 0.6vw;
-	content: ' | ';
 	color: #fff5;
+	content: ' | ';
 }
 
 .info-day {
@@ -229,15 +226,89 @@ body {
 
 .settings {
 	display: flex;
+
+/* margin-top: -30px; */
+	align-items: center;
 	flex-direction: column;
 	justify-content: center;
 	margin: 0 auto;
 	width: 100%;
-	/* margin-top: -30px; */
 }
 
 .settings-selector {
 	margin: 0 auto;
+}
+
+.option-button {
+	margin: 0.4vw;
+	padding: 1vw;
+	width: max-content;
+	height: max-content;
+	outline: none;
+	border: none;
+	background-color: black;
+	color: white;
+	font-size: 1vw;
+	transition: 200ms ease-out;
+}
+
+.option-button:hover {
+	background-color: #4c4c72;
+}
+
+.option-button.small {
+	font-size: 0.8vw;
+	margin: 0.2vw;
+	padding: 0.4vw;
+}
+
+.editor {
+	display: none;
+	padding: 10px;
+	width: max-content;
+	width: max-content;
+	height: max-content;
+	background-color: white;
+}
+
+.editor > .form {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	background-color: white;
+}
+
+.form-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.form-row > * {
+	width: 50%;
+}
+
+.form-row > .form-label {
+	margin: auto auto;
+	color: black;
+	font-size: 1vw;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.form-row > input[type='text'] {
+	margin: 10px;
+	padding: 4px;
+	width: max-content;
+	height: calc(1vw);
+	outline: none;
+	border: none;
+	border-bottom: 2px solid black;
+	font-size: 1vw;
+}
+
+.form-row > input[type='color'] {
+	display: none;
 }
 
 footer {
