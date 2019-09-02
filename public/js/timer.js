@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 var schedules = [{
 		name: 'normal',
-		days: '0123456',
+		days: '15',
 		data: {
 			startTime: '7:21',
 			times: ['8:15', '9:06', '9:57', '10:48', '11:39', '12:30', '13:21', '14:12'],
@@ -10,13 +10,23 @@ var schedules = [{
 		}
 	},
 	{
-		name: 'half-day',
-		days: '124',
+		name: 'extraPeriodEight',
+		days: '3',
 		data: {
-			startTime: '7:00',
-			times: ['7:50', '8:40', '9:30'],
-			names: ['Period 1', 'Period 2', 'Period 3'],
-			short: ['1', '2', '3']
+			startTime: '7:21',
+			times: ['8:09', '8:56', '9:43', '10:30', '11:17', '12:04', '12:51', '1:38', '2:12'],
+			names: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8', '8B'],
+			short: ['1', '2', '3', '4', '5', '6', '7', '8', '8B']
+		}
+	},
+	{
+		name: 'knightTime',
+		days: '24',
+		data: {
+			startTime: '7:21',
+			times: ['8:05', '8:52', '9:39', '10:17', '11:04', '11:51', '12:38', '1:25', '2:12'],
+			names: ['Period 1', 'Period 2', 'Knight Time', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8'],
+			short: ['1', '2', 'KT', '3', '4', '5', '6', '7', '8']
 		}
 	}
 ];
@@ -70,7 +80,7 @@ function increaseTimer() {
 	let cellSpacing = 45;
 	let cellWidth = 10;
 
-	let date = new String(new Date()).split(' ').splice(0,3).join(' ');
+	let date = new String(new Date()).split(' ').splice(0, 3).join(' ');
 	let time = new Date().toLocaleString().split(', ')[1].replace(/:\d\d([ ap]|$)/, ' ')
 
 	// ======= ADD Condition if not over max period time =======
@@ -83,7 +93,7 @@ function increaseTimer() {
 
 	// Update info
 	// $('.info-date').text(new Date().toLocaleString().split(', ')[0]);
-	$('.info-date').text(new String(new Date()).split(' ').splice(0,3).join(' '));
+	$('.info-date').text(new String(new Date()).split(' ').splice(0, 3).join(' '));
 	$('.info-time').text(new Date().toLocaleString().split(', ')[1].replace(/:\d\d([ ap]|$)/, ' '));
 	$('.info-day').text('F Day');
 
