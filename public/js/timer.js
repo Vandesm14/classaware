@@ -1,19 +1,22 @@
 /* jshint esversion: 6 */
 
-$(document).ready(function(){
-	$('#toggleEditor').on('click', function(){
+$(document).ready(function () {
+	$('#toggleEditor').on('click', function () {
 		toggleEditor();
 	});
-	$('#submitEditor').on('click', function(){
+	$('#submitEditor').on('click', function () {
 		submitClasses();
 	});
-	$('#deleteClasses').on('click', function(){
+	$('#deleteClasses').on('click', function () {
 		deleteClasses();
+	});
+	$('.schedule-selector').on('change', function () {
+		changeSchedule();
 	});
 });
 
 var schedules = [{
-		name: 'normal',
+		name: 'Normal',
 		days: '15',
 		data: {
 			startTime: '7:21',
@@ -23,7 +26,7 @@ var schedules = [{
 		}
 	},
 	{
-		name: 'extraPeriodEight',
+		name: '8B',
 		days: '3',
 		data: {
 			startTime: '7:21',
@@ -33,7 +36,7 @@ var schedules = [{
 		}
 	},
 	{
-		name: 'knightTime',
+		name: 'KT',
 		days: '24',
 		data: {
 			startTime: '7:21',
@@ -51,6 +54,7 @@ var periods;
 var currentPeriod;
 var periodLength;
 
+var normalIndex;
 var customClasses;
 var timerInterval;
 var devOffest = 0;
@@ -67,6 +71,7 @@ function getCurrentSchedule() {
 	for (let i in schedules) {
 		if (schedules[i].days.includes(day)) {
 			scheduleIndex = i;
+			normalIndex = i;
 			break;
 		}
 	}
@@ -76,18 +81,20 @@ function getCurrentSchedule() {
 	// set timer columns to names
 	createColumns();
 	createClassRows();
+	createSelectOptions();
+
+	timerInterval = setInterval(increaseTimer, 1000);
+	increaseTimer();
 }
 
 function createColumns() {
 	let template = $('#column-template').html();
+	$('.timer').html('');
 	for (let i in schedules[scheduleIndex].data.short) {
 		let hold = template.replace('{{name}}', schedules[scheduleIndex].data.short[i]);
 		hold = hold.replace('{{endTime}}', schedules[scheduleIndex].data.times[i]);
 		$('.timer').append(hold);
 	}
-
-	timerInterval = setInterval(increaseTimer, 1000);
-	increaseTimer();
 }
 
 function createClassRows() {
@@ -109,6 +116,14 @@ function createClassRows() {
 			hold = hold.replace('{{customClass}}', '');
 		}
 		$('.form-row-container').append(hold);
+	}
+}
+
+function createSelectOptions() {
+	let template = $('#select-option-template').html();
+	for (let i in schedules) {
+		let hold = template.replace(/{{name}}/g, schedules[i].name);
+		$('.schedule-selector').append(hold);
 	}
 }
 
@@ -174,11 +189,14 @@ function getCurrentPeriod() {
 	let period;
 
 	// find position in times array
-	for (let i in currentSchedule.data.times) {
+	// for (let i in currentSchedule.data.times) {
+	for (let i in schedules[scheduleIndex].data.times) {
 		let periodTime = new Date();
 		let previousPeriodTime = new Date();
-		periodTime.setHours(currentSchedule.data.times[i].split(':')[0]);
-		periodTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
+		// periodTime.setHours(currentSchedule.data.times[i].split(':')[0]);
+		periodTime.setHours(schedules[scheduleIndex].data.times[i].split(':')[0]);
+		// periodTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
+		periodTime.setMinutes(schedules[scheduleIndex].data.times[i].split(':')[1]);
 		periodTime.setSeconds(0);
 
 		if (time < periodTime) {
@@ -188,11 +206,15 @@ function getCurrentPeriod() {
 
 			// get period duration
 			if (i === 0) {
-				previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
-				previousPeriodTime.setMinutes(currentSchedule.data.startTime.split(':')[1]);
+				// previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
+				previousPeriodTime.setHours(schedules[scheduleIndex].data.startTime.split(':')[0]);
+				// previousPeriodTime.setMinutes(currentSchedule.data.startTime.split(':')[1]);
+				previousPeriodTime.setMinutes(schedules[scheduleIndex].data.startTime.split(':')[1]);
 			} else {
-				previousPeriodTime.setHours(currentSchedule.data.times[i - 1].split(':')[0]);
-				previousPeriodTime.setMinutes(currentSchedule.data.times[i - 1].split(':')[1]);
+				// previousPeriodTime.setHours(currentSchedule.data.times[i - 1].split(':')[0]);
+				previousPeriodTime.setHours(schedules[scheduleIndex].data.times[i - 1].split(':')[0]);
+				// previousPeriodTime.setMinutes(currentSchedule.data.times[i - 1].split(':')[1]);
+				previousPeriodTime.setMinutes(schedules[scheduleIndex].data.times[i - 1].split(':')[1]);
 			}
 			previousPeriodTime.setSeconds(0);
 
@@ -224,7 +246,7 @@ function toggleEditor() {
 function submitClasses() {
 	customClasses = {};
 	let period;
-	$('.form-row-container').children('.form-row').each(function(elem){
+	$('.form-row-container').children('.form-row').each(function (elem) {
 		period = $(this).children('.form-label').text();
 		customClasses[period] = $(this).children('.form-input').val();
 	});
@@ -235,9 +257,18 @@ function submitClasses() {
 function deleteClasses() {
 	customClasses = null;
 	localStorage.removeItem('customClasses');
-	$('.form-row-container').children('.form-row').each(function(elem){
+	$('.form-row-container').children('.form-row').each(function (elem) {
 		$(this).children('.form-input').val('');
 	});
+}
+
+function changeSchedule() {
+	if ($('.schedule-selector').val() === 'Auto') {
+		scheduleIndex = normalIndex;
+	} else {
+		scheduleIndex = $('.schedule-selector > option:selected').index() - 1;
+	}
+	createColumns();
 }
 
 function parseTime(date) {
