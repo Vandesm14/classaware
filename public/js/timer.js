@@ -57,7 +57,8 @@ var periodLength;
 var normalIndex;
 var customClasses;
 var timerInterval;
-var devOffest = 0;
+// var devOffest = 0;
+var devOffest = -45600;
 
 getCurrentSchedule();
 
@@ -199,13 +200,14 @@ function getCurrentPeriod() {
 		periodTime.setMinutes(schedules[scheduleIndex].data.times[i].split(':')[1]);
 		periodTime.setSeconds(0);
 
+		
 		if (time < periodTime) {
 			// perform subtraction function
 			remainingTime = periodTime - time;
 			currentPeriod = parseInt(i);
-
+			
 			// get period duration
-			if (i === 0) {
+			if (i == 0) { // Not triple "=" since i is a string, not a number
 				// previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
 				previousPeriodTime.setHours(schedules[scheduleIndex].data.startTime.split(':')[0]);
 				// previousPeriodTime.setMinutes(currentSchedule.data.startTime.split(':')[1]);
