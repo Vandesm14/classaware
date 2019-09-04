@@ -226,7 +226,7 @@ function getCurrentPeriod() {
 
 	// output time left
 	if (remainingTime === undefined) {
-		$('.timer-pointer-label').text('End');
+		$('.timer-pointer-label').text('End of Day');
 		$('.timer-period-label').text('');
 	} else {
 		if (customClasses === undefined || customClasses === null || customClasses[schedules[scheduleIndex].data.names[currentPeriod]] === '') {
@@ -253,6 +253,7 @@ function submitClasses() {
 	});
 
 	localStorage.setItem('customClasses', JSON.stringify(customClasses));
+	$('.editor').hide();
 }
 
 function deleteClasses() {
