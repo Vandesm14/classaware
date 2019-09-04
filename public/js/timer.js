@@ -57,8 +57,7 @@ var periodLength;
 var normalIndex;
 var customClasses;
 var timerInterval;
-// var devOffest = 0;
-var devOffest = -45600;
+var devOffest = 0;
 
 getCurrentSchedule();
 
