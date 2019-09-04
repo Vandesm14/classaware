@@ -150,7 +150,8 @@ function increaseTimer() {
 	// $('.info-date').text(new Date().toLocaleString().split(', ')[0]);
 	$('.info-date').text(new String(new Date()).split(' ').splice(0, 3).join(' '));
 	$('.info-time').text(new Date().toLocaleString().split(', ')[1].replace(/:\d\d([ ap]|$)/, ' '));
-	$('.info-day').text('F Day');
+	// $('.info-day').text('F Day');
+	$('.info-day').text('');
 
 	// Move pointer
 	$('.timer-pointer').animate({
