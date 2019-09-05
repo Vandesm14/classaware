@@ -41,8 +41,8 @@ var schedules = [{
 		data: {
 			startTime: '7:21',
 			times: ['8:05', '8:52', '9:39', '10:17', '11:04', '11:51', '12:38', '1:25', '2:12'],
-			names: ['Period 1', 'Period 2', 'Knight Time', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8'],
-			short: ['1', '2', 'KT', '3', '4', '5', '6', '7', '8']
+			names: ['Period 1', 'Period 2', 'Period 3', 'Knight Time', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8'],
+			short: ['1', '2', '3', 'KT', '4', '5', '6', '7', '8']
 		}
 	}
 ];
