@@ -54,6 +54,7 @@ var periods;
 var currentPeriod;
 var periodLength;
 
+var notTime;
 var normalIndex;
 var customClasses;
 var timerInterval;
@@ -153,33 +154,35 @@ function increaseTimer() {
 	// $('.info-day').text('F Day');
 	$('.info-day').text('');
 
-	// Move pointer
-	$('.timer-pointer').animate({
-		// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
-		left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
-	});
+	if (!notTime) {
+		// Move pointer
+		$('.timer-pointer').animate({
+			// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
+			left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
+		});
 
-	// Move timer
-	$('.timer').animate({
-		left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
-	});
+		// Move timer
+		$('.timer').animate({
+			left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
+		});
 
-	// Reset column classes
-	$('.timer').children('.timer-column').removeClass('current');
-	$('.timer').children('.timer-column').removeClass('next');
-	// $('.timer').children('.timer-column').css('opacity', '0.2');
-	$('.timer').children('.timer-column').css('opacity', '0.5');
+		// Reset column classes
+		$('.timer').children('.timer-column').removeClass('current');
+		$('.timer').children('.timer-column').removeClass('next');
+		// $('.timer').children('.timer-column').css('opacity', '0.2');
+		$('.timer').children('.timer-column').css('opacity', '0.5');
 
-	// Set main column class
-	$('.timer').children(`.timer-column:eq(${currentPeriod})`).addClass('current');
-	$('.timer').children(`.timer-column:eq(${currentPeriod})`).css('opacity', '1');
+		// Set main column class
+		$('.timer').children(`.timer-column:eq(${currentPeriod})`).addClass('current');
+		$('.timer').children(`.timer-column:eq(${currentPeriod})`).css('opacity', '1');
 
-	// Show secondary columns
-	$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).addClass('next');
-	// $('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.5');
-	$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.8');
-	if (currentPeriod - 1 !== -1) {
-		$('.timer').children(`.timer-column:eq(${currentPeriod - 1})`).css('opacity', '1');
+		// Show secondary columns
+		$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).addClass('next');
+		// $('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.5');
+		$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.8');
+		if (currentPeriod - 1 !== -1) {
+			$('.timer').children(`.timer-column:eq(${currentPeriod - 1})`).css('opacity', '1');
+		}
 	}
 }
 
@@ -188,6 +191,12 @@ function getCurrentPeriod() {
 	let time = new Date();
 	time.setTime(time.getTime() + (devOffest * 1000));
 	let period;
+	let startTime = new Date();
+	// startTime.setHours(currentSchedule.data.times[i].split(':')[0]);
+	startTime.setHours(schedules[scheduleIndex].data.startTime.split(':')[0]);
+	// startTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
+	startTime.setMinutes(schedules[scheduleIndex].data.startTime.split(':')[1]);
+	startTime.setSeconds(0);
 
 	// find position in times array
 	// for (let i in currentSchedule.data.times) {
@@ -200,12 +209,11 @@ function getCurrentPeriod() {
 		periodTime.setMinutes(schedules[scheduleIndex].data.times[i].split(':')[1]);
 		periodTime.setSeconds(0);
 
-		
 		if (time < periodTime) {
 			// perform subtraction function
 			remainingTime = periodTime - time;
 			currentPeriod = parseInt(i);
-			
+
 			// get period duration
 			if (i == 0) { // Not triple "=" since i is a string, not a number
 				// previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
@@ -226,10 +234,16 @@ function getCurrentPeriod() {
 	}
 
 	// output time left
-	if (remainingTime === undefined) {
-		$('.timer-pointer-label').text('End of Day');
+	if (remainingTime === undefined || time < startTime) {
+		notTime = true;
+		$('.timer-pointer-label').text('Not School Hours');
 		$('.timer-period-label').text('');
+
+		$('.timer-pointer').hide();
 	} else {
+		notTime = false;
+		$('.timer-pointer').show();
+		
 		if (customClasses === undefined || customClasses === null || customClasses[schedules[scheduleIndex].data.names[currentPeriod]] === '') {
 			period = schedules[scheduleIndex].data.names[currentPeriod];
 		} else {
@@ -238,6 +252,7 @@ function getCurrentPeriod() {
 
 		$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
 		$('.timer-period-label').text(period);
+		$(document).attr('title', 'Classaware | Timer: ' + new Date(remainingTime).getMinutes() + 'm');
 	}
 }
 
