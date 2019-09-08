@@ -54,6 +54,7 @@ var periods;
 var currentPeriod;
 var periodLength;
 
+var notTime;
 var normalIndex;
 var customClasses;
 var timerInterval;
@@ -153,6 +154,7 @@ function increaseTimer() {
 	// $('.info-day').text('F Day');
 	$('.info-day').text('');
 
+	if (!notTime) {
 	// Move pointer
 	$('.timer-pointer').animate({
 		// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
@@ -182,12 +184,19 @@ function increaseTimer() {
 		$('.timer').children(`.timer-column:eq(${currentPeriod - 1})`).css('opacity', '1');
 	}
 }
+}
 
 function getCurrentPeriod() {
 	// DEV offset
 	let time = new Date();
 	time.setTime(time.getTime() + (devOffest * 1000));
 	let period;
+	let startTime = new Date();
+	// startTime.setHours(currentSchedule.data.times[i].split(':')[0]);
+	startTime.setHours(schedules[scheduleIndex].data.startTime.split(':')[0]);
+	// startTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
+	startTime.setMinutes(schedules[scheduleIndex].data.startTime.split(':')[1]);
+	startTime.setSeconds(0);
 
 	// find position in times array
 	// for (let i in currentSchedule.data.times) {
@@ -226,10 +235,16 @@ function getCurrentPeriod() {
 	}
 
 	// output time left
-	if (remainingTime === undefined) {
-		$('.timer-pointer-label').text('End of Day');
+	if (remainingTime === undefined || time < startTime) {
+		notTime = true;
+		$('.timer-pointer-label').text('Not School Hours');
 		$('.timer-period-label').text('');
+
+		$('.timer-pointer').hide();
 	} else {
+		notTime = false;
+		$('.timer-pointer').show();
+		
 		if (customClasses === undefined || customClasses === null || customClasses[schedules[scheduleIndex].data.names[currentPeriod]] === '') {
 			period = schedules[scheduleIndex].data.names[currentPeriod];
 		} else {
