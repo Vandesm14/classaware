@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+/* version: 1.2.1 */
 
 $(document).ready(function () {
 	$('#toggleEditor').on('click', function () {
