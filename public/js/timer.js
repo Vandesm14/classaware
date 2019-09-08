@@ -17,7 +17,8 @@ $(document).ready(function () {
 
 var schedules = [{
 		name: 'Normal',
-		days: '15',
+		// days: '15',
+		days: '0123456',
 		data: {
 			startTime: '7:21',
 			times: ['8:15', '9:06', '9:57', '10:48', '11:39', '12:30', '13:21', '14:12'],
@@ -155,35 +156,35 @@ function increaseTimer() {
 	$('.info-day').text('');
 
 	if (!notTime) {
-	// Move pointer
-	$('.timer-pointer').animate({
-		// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
-		left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
-	});
+		// Move pointer
+		$('.timer-pointer').animate({
+			// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
+			left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
+		});
 
-	// Move timer
-	$('.timer').animate({
-		left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
-	});
+		// Move timer
+		$('.timer').animate({
+			left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
+		});
 
-	// Reset column classes
-	$('.timer').children('.timer-column').removeClass('current');
-	$('.timer').children('.timer-column').removeClass('next');
-	// $('.timer').children('.timer-column').css('opacity', '0.2');
-	$('.timer').children('.timer-column').css('opacity', '0.5');
+		// Reset column classes
+		$('.timer').children('.timer-column').removeClass('current');
+		$('.timer').children('.timer-column').removeClass('next');
+		// $('.timer').children('.timer-column').css('opacity', '0.2');
+		$('.timer').children('.timer-column').css('opacity', '0.5');
 
-	// Set main column class
-	$('.timer').children(`.timer-column:eq(${currentPeriod})`).addClass('current');
-	$('.timer').children(`.timer-column:eq(${currentPeriod})`).css('opacity', '1');
+		// Set main column class
+		$('.timer').children(`.timer-column:eq(${currentPeriod})`).addClass('current');
+		$('.timer').children(`.timer-column:eq(${currentPeriod})`).css('opacity', '1');
 
-	// Show secondary columns
-	$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).addClass('next');
-	// $('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.5');
-	$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.8');
-	if (currentPeriod - 1 !== -1) {
-		$('.timer').children(`.timer-column:eq(${currentPeriod - 1})`).css('opacity', '1');
+		// Show secondary columns
+		$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).addClass('next');
+		// $('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.5');
+		$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.8');
+		if (currentPeriod - 1 !== -1) {
+			$('.timer').children(`.timer-column:eq(${currentPeriod - 1})`).css('opacity', '1');
+		}
 	}
-}
 }
 
 function getCurrentPeriod() {
@@ -209,12 +210,11 @@ function getCurrentPeriod() {
 		periodTime.setMinutes(schedules[scheduleIndex].data.times[i].split(':')[1]);
 		periodTime.setSeconds(0);
 
-		
 		if (time < periodTime) {
 			// perform subtraction function
 			remainingTime = periodTime - time;
 			currentPeriod = parseInt(i);
-			
+
 			// get period duration
 			if (i == 0) { // Not triple "=" since i is a string, not a number
 				// previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
@@ -253,6 +253,7 @@ function getCurrentPeriod() {
 
 		$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
 		$('.timer-period-label').text(period);
+		$(document).attr('title', 'Classaware | Timer: ' + new Date(remainingTime).getMinutes() + 'm');
 	}
 }
 
