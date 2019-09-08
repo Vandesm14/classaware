@@ -17,8 +17,7 @@ $(document).ready(function () {
 
 var schedules = [{
 		name: 'Normal',
-		// days: '15',
-		days: '0123456',
+		days: '15',
 		data: {
 			startTime: '7:21',
 			times: ['8:15', '9:06', '9:57', '10:48', '11:39', '12:30', '13:21', '14:12'],
