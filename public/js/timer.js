@@ -148,7 +148,6 @@ function increaseTimer() {
 	}
 
 	// Update info
-	// $('.info-date').text(new Date().toLocaleString().split(', ')[0]);
 	$('.info-date').text(new String(new Date()).split(' ').splice(0, 3).join(' '));
 	$('.info-time').text(new Date().toLocaleString().split(', ')[1].replace(/:\d\d([ ap]|$)/, ' '));
 	// $('.info-day').text('F Day');
@@ -157,7 +156,6 @@ function increaseTimer() {
 	if (!notTime) {
 		// Move pointer
 		$('.timer-pointer').animate({
-			// left: ((vw * cellSpacing) + (timerWidth / maxTime) * (time % periodLength)) - (pointerWidth / 2)
 			left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
 		});
 
@@ -169,7 +167,6 @@ function increaseTimer() {
 		// Reset column classes
 		$('.timer').children('.timer-column').removeClass('current');
 		$('.timer').children('.timer-column').removeClass('next');
-		// $('.timer').children('.timer-column').css('opacity', '0.2');
 		$('.timer').children('.timer-column').css('opacity', '0.5');
 
 		// Set main column class
@@ -178,7 +175,6 @@ function increaseTimer() {
 
 		// Show secondary columns
 		$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).addClass('next');
-		// $('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.5');
 		$('.timer').children(`.timer-column:eq(${currentPeriod + 1})`).css('opacity', '0.8');
 		if (currentPeriod - 1 !== -1) {
 			$('.timer').children(`.timer-column:eq(${currentPeriod - 1})`).css('opacity', '1');
@@ -192,20 +188,15 @@ function getCurrentPeriod() {
 	time.setTime(time.getTime() + (devOffest * 1000));
 	let period;
 	let startTime = new Date();
-	// startTime.setHours(currentSchedule.data.times[i].split(':')[0]);
 	startTime.setHours(schedules[scheduleIndex].data.startTime.split(':')[0]);
-	// startTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
 	startTime.setMinutes(schedules[scheduleIndex].data.startTime.split(':')[1]);
 	startTime.setSeconds(0);
 
 	// find position in times array
-	// for (let i in currentSchedule.data.times) {
 	for (let i in schedules[scheduleIndex].data.times) {
 		let periodTime = new Date();
 		let previousPeriodTime = new Date();
-		// periodTime.setHours(currentSchedule.data.times[i].split(':')[0]);
 		periodTime.setHours(schedules[scheduleIndex].data.times[i].split(':')[0]);
-		// periodTime.setMinutes(currentSchedule.data.times[i].split(':')[1]);
 		periodTime.setMinutes(schedules[scheduleIndex].data.times[i].split(':')[1]);
 		periodTime.setSeconds(0);
 
@@ -216,14 +207,10 @@ function getCurrentPeriod() {
 
 			// get period duration
 			if (i == 0) { // Not triple "=" since i is a string, not a number
-				// previousPeriodTime.setHours(currentSchedule.data.startTime.split(':')[0]);
 				previousPeriodTime.setHours(schedules[scheduleIndex].data.startTime.split(':')[0]);
-				// previousPeriodTime.setMinutes(currentSchedule.data.startTime.split(':')[1]);
 				previousPeriodTime.setMinutes(schedules[scheduleIndex].data.startTime.split(':')[1]);
 			} else {
-				// previousPeriodTime.setHours(currentSchedule.data.times[i - 1].split(':')[0]);
 				previousPeriodTime.setHours(schedules[scheduleIndex].data.times[i - 1].split(':')[0]);
-				// previousPeriodTime.setMinutes(currentSchedule.data.times[i - 1].split(':')[1]);
 				previousPeriodTime.setMinutes(schedules[scheduleIndex].data.times[i - 1].split(':')[1]);
 			}
 			previousPeriodTime.setSeconds(0);
