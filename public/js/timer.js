@@ -1,5 +1,4 @@
-/* jshint esversion: 6 */
-/* version: 1.2.3 */
+/* version: 1.2.4 */
 
 $(document).ready(function () {
 	$('#toggleEditor').on('click', function () {
@@ -156,11 +155,13 @@ function increaseTimer() {
 
 	if (!notTime) {
 		// Move pointer
+		$('.timer-pointer').stop(true, true);
 		$('.timer-pointer').animate({
 			left: (vw * cellSpacing) + (vw * cellWidth * ((periodLength - remainingTime) / periodLength))
 		});
 
 		// Move timer
+		$('.timer').stop(true, true);
 		$('.timer').animate({
 			left: (vw * cellSpacing) - ((vw * cellWidth) * currentPeriod)
 		});
@@ -232,10 +233,10 @@ function getCurrentPeriod() {
 		notTime = false;
 		$('.timer-pointer').show();
 		
-		if (customClasses === undefined || customClasses === null || customClasses[schedules[scheduleIndex].data.names[currentPeriod]] === '') {
-			period = schedules[scheduleIndex].data.names[currentPeriod];
-		} else {
+		if (customClasses && customClasses[schedules[scheduleIndex].data.names[currentPeriod]]) {
 			period = customClasses[schedules[scheduleIndex].data.names[currentPeriod]];
+		} else {
+			period = schedules[scheduleIndex].data.names[currentPeriod];
 		}
 
 		$('.timer-pointer-label').text(parseTime(new Date(remainingTime)) + ' left');
