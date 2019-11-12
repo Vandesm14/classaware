@@ -1,5 +1,5 @@
 [{
-		"name": "normal",
+		"name": "Normal",
 		"days": "15",
 		"data": {
 			"startTime": "7:21",
@@ -9,7 +9,7 @@
 		}
 	},
 	{
-		"name": "extraPeriodEight",
+		"name": "8B",
 		"days": "3",
 		"data": {
 			"startTime": "7:21",
@@ -19,7 +19,7 @@
 		}
 	},
 	{
-		"name": "knightTime",
+		"name": "KT",
 		"days": "24",
 		"data": {
 			"startTime": "7:21",
