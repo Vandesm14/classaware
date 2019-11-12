@@ -13,39 +13,18 @@ $(document).ready(function () {
 	$('.schedule-selector').on('change', function () {
 		changeSchedule();
 	});
+
+	$.get('https://Classaware-Server--vandesm14.repl.co/schedule', function (res) {
+		schedules = res;
+		getCurrentSchedule();
+	});
+
+	$.get('https://Classaware-Server--vandesm14.repl.co/alerts', function (res) {
+	
+	});
 });
 
-var schedules = [{
-		name: 'Normal',
-		days: '15',
-		data: {
-			startTime: '7:21',
-			times: ['8:15', '9:06', '9:57', '10:48', '11:39', '12:30', '13:21', '14:12'],
-			names: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8'],
-			short: ['1', '2', '3', '4', '5', '6', '7', '8']
-		}
-	},
-	{
-		name: '8B',
-		days: '3',
-		data: {
-			startTime: '7:21',
-			times: ['8:09', '8:56', '9:43', '10:30', '11:17', '12:04', '12:51', '13:38', '14:12'],
-			names: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8', '8B'],
-			short: ['1', '2', '3', '4', '5', '6', '7', '8', '8B']
-		}
-	},
-	{
-		name: 'KT',
-		days: '24',
-		data: {
-			startTime: '7:21',
-			times: ['8:05', '8:52', '9:39', '10:17', '11:04', '11:51', '12:38', '13:25', '14:12'],
-			names: ['Period 1', 'Period 2', 'Period 3', 'Knight Time', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8'],
-			short: ['1', '2', '3', 'KT', '4', '5', '6', '7', '8']
-		}
-	}
-];
+var schedules;
 
 var remainingTime;
 var scheduleIndex;
@@ -58,9 +37,8 @@ var notTime;
 var normalIndex;
 var customClasses;
 var timerInterval;
-var devOffest = 0;
+var devOffest = -60 * 60 * 5;
 
-getCurrentSchedule();
 
 function getCurrentSchedule() {
 	if (localStorage.getItem('customClasses') !== undefined) {
@@ -232,7 +210,7 @@ function getCurrentPeriod() {
 	} else {
 		notTime = false;
 		$('.timer-pointer').show();
-		
+
 		if (customClasses && customClasses[schedules[scheduleIndex].data.names[currentPeriod]]) {
 			period = customClasses[schedules[scheduleIndex].data.names[currentPeriod]];
 		} else {

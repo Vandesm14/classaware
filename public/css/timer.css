@@ -4,11 +4,37 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100vh;
-
-/* background-color: #303f9f; */
 	background-color: #1e2b60;
 	background-image: url('https://i.pinimg.com/originals/5c/f2/66/5cf2660af5f4214def7166dc7a7c8062.jpg');
 	color: white;
+}
+
+.alerts {
+	width: 100%;
+	position: absolute;
+}
+
+.alert {
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 4px 8px;
+}
+
+.alert.red {
+	background-color: red;
+}
+
+.alert.orange {
+	background-color: orange;
+}
+
+.alert.green {
+	background-color: green;
+}
+
+.alert.blue {
+	background-color: blue;
 }
 
 .title {
@@ -36,7 +62,7 @@ body {
 }
 
 .app {
-	/* display: flex; */
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
@@ -257,9 +283,9 @@ body {
 }
 
 .option-button.small {
-	font-size: 0.8vw;
 	margin: 0.2vw;
 	padding: 0.4vw;
+	font-size: 0.8vw;
 }
 
 .editor {
@@ -333,6 +359,6 @@ footer {
 }
 
 .feedback > a {
-	color: white;
 	margin-bottom: 4px;
+	color: white;
 }
