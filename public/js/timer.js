@@ -20,7 +20,17 @@ $(document).ready(function () {
 	});
 
 	$.get('https://Classaware-Server--vandesm14.repl.co/alerts', function (res) {
-	
+		let template = $('#alert-template').html();
+		$('.alerts').html('');
+		for (let i in res) {
+			let hold = template;
+			hold = hold.replace('{{message}}', res[i].message);
+			hold = hold.replace('{{color}}', res[i].color);
+			$('.alerts').append(hold);
+		}
+		$('.alert').on('click', function () {
+			$(this).hide();
+		});
 	});
 });
 
