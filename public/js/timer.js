@@ -47,7 +47,7 @@ var notTime;
 var normalIndex;
 var customClasses;
 var timerInterval;
-var devOffest = -60 * 60 * 5;
+var devOffest = 0;
 
 
 function getCurrentSchedule() {
