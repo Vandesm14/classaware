@@ -8,49 +8,53 @@
           ALL RIGHTS RESERVED    PATENTS PENDING
 		=========================================================================================
 -->
+
 <head>
 	<meta name="viewport" content="width=device-width">
 	<meta charset="utf-8">
-    
+
 	<title>Classaware | Timer</title>
 	<meta name="description" content="Classaware - Class Schedule Tracking and Awareness" />
 	<meta name="keywords" content="Classaware, Timer, Bells, Class" />
-    
+
 	<link href="css/timer.css" rel="stylesheet" type="text/css" />
 
 	<link rel="icon" href="images/fav.ico" type="image/ico" />
 	<link rel="shortcut icon" href="images/fav.ico" type="image/ico" />
-    
+
 </head>
 
 <body>
-	<h1 class="title">Classaware</h1>
-	<image class="titleLogo" src="images/logo.png"></image>
 	<div class="app">
-		<div class="info">
-			<div class="info-time-container">
-				<p class="info-date">Date</p>
-				<p class="info-time">Time</p>
+		<div class="alerts"></div>
+		<h1 class="title">Classaware</h1>
+		<image class="titleLogo" src="images/logo.png"></image>
+		<div class="viewer">
+			<div class="info">
+				<div class="info-time-container">
+					<p class="info-date">Date</p>
+					<p class="info-time">Time</p>
+				</div>
+				<p class="info-day">Day</p>
 			</div>
-			<p class="info-day">Day</p>
+			<div class="timer-container">
+				<div class="timer-period-label"></div>
+				<div class="timer"></div>
+				<div class="timer-pointer"></div>
+				<div class="timer-pointer-label"></div>
+			</div>
 		</div>
-		<div class="timer-container">
-			<div class="timer-period-label"></div>
-			<div class="timer"></div>
-			<div class="timer-pointer"></div>
-			<div class="timer-pointer-label"></div>
-		</div>
-	</div>
-	<div class="settings">
-		<select class="schedule-selector">
-			<option value="Auto">Auto</option>
-		</select>
-		<button class="option-button" id="toggleEditor">Class Editor</button>
-		<div class="editor">
-			<div class="form">
-				<div class="form-row-container"></div>
-				<button class="option-button" id="submitEditor">Save</button>
-				<button class="option-button small" id="deleteClasses">Delete</button>
+		<div class="settings">
+			<select class="schedule-selector">
+				<option value="Auto">Auto</option>
+			</select>
+			<button class="option-button" id="toggleEditor">Class Editor</button>
+			<div class="editor">
+				<div class="form">
+					<div class="form-row-container"></div>
+					<button class="option-button" id="submitEditor">Save</button>
+					<button class="option-button small" id="deleteClasses">Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -73,8 +77,24 @@
 	<template id="select-option-template">
 		<option value="{{name}}">{{name}}</option>
 	</template>
+	<template id="alert-template">
+		<p class="alert {{color}}" title="Click to remove">{{message}}</p>
+	</template>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="js/timer.js"></script>
+
+	<!-- Default Statcounter code for Classaware.org http://classaware.org/ -->
+	<script type="text/javascript">
+		var sc_project = 12141346;
+		var sc_invisible = 1;
+		var sc_security = "0c81274e";
+	</script>
+	<script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+	<noscript>
+		<div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img
+					class="statcounter" src="https://c.statcounter.com/12141346/0/0c81274e/1/" alt="Web Analytics"></a></div>
+	</noscript>
+	<!-- End of Statcounter Code -->
 </body>
 
 </html>
