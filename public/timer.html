@@ -25,36 +25,38 @@
 </head>
 
 <body>
-	<div class="alerts">
-		<p class="alert orange">Letter days and alerts are now implemented (v1.3.0)</p>
-	</div>
-	<h1 class="title">Classaware</h1>
-	<image class="titleLogo" src="images/logo.png"></image>
 	<div class="app">
-		<div class="info">
-			<div class="info-time-container">
-				<p class="info-date">Date</p>
-				<p class="info-time">Time</p>
+		<div class="alerts">
+			<p class="alert orange">Letter days and alerts are now implemented (v1.3.0)</p>
+		</div>
+		<h1 class="title">Classaware</h1>
+		<image class="titleLogo" src="images/logo.png"></image>
+		<div class="viewer">
+			<div class="info">
+				<div class="info-time-container">
+					<p class="info-date">Date</p>
+					<p class="info-time">Time</p>
+				</div>
+				<p class="info-day">Day</p>
 			</div>
-			<p class="info-day">Day</p>
+			<div class="timer-container">
+				<div class="timer-period-label"></div>
+				<div class="timer"></div>
+				<div class="timer-pointer"></div>
+				<div class="timer-pointer-label"></div>
+			</div>
 		</div>
-		<div class="timer-container">
-			<div class="timer-period-label"></div>
-			<div class="timer"></div>
-			<div class="timer-pointer"></div>
-			<div class="timer-pointer-label"></div>
-		</div>
-	</div>
-	<div class="settings">
-		<select class="schedule-selector">
-			<option value="Auto">Auto</option>
-		</select>
-		<button class="option-button" id="toggleEditor">Class Editor</button>
-		<div class="editor">
-			<div class="form">
-				<div class="form-row-container"></div>
-				<button class="option-button" id="submitEditor">Save</button>
-				<button class="option-button small" id="deleteClasses">Delete</button>
+		<div class="settings">
+			<select class="schedule-selector">
+				<option value="Auto">Auto</option>
+			</select>
+			<button class="option-button" id="toggleEditor">Class Editor</button>
+			<div class="editor">
+				<div class="form">
+					<div class="form-row-container"></div>
+					<button class="option-button" id="submitEditor">Save</button>
+					<button class="option-button small" id="deleteClasses">Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -76,6 +78,9 @@
 	</template>
 	<template id="select-option-template">
 		<option value="{{name}}">{{name}}</option>
+	</template>
+	<template id="alert-template">
+		<p class="alert {{color}}">{{message}}</p>
 	</template>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="js/timer.js"></script>
