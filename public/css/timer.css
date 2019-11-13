@@ -48,15 +48,15 @@ a, a:visited {
 }
 
 .alert.orange {
-	background-color: orange;
+	background-color: #FF9800;
 }
 
 .alert.green {
-	background-color: green;
+	background-color: #47974b;
 }
 
 .alert.blue {
-	background-color: blue;
+	background-color: #3F51B5;
 }
 
 /* ----------Title---------- */
